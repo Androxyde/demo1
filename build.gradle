@@ -1,0 +1,50 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.micronaut.application") version "4.2.0"
+}
+
+version = "0.1"
+group = "com.example"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("info.picocli:picocli-codegen")
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    implementation("info.picocli:picocli")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.picocli:micronaut-picocli")
+    implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("io.micronaut.reactor:micronaut-reactor-http-client")
+    implementation("io.micronaut.security:micronaut-security")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.session:micronaut-session")
+    compileOnly("org.projectlombok:lombok")
+    runtimeOnly("ch.qos.logback:logback-classic")
+}
+
+
+application {
+    mainClass.set("com.example.Demo1Command")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
+}
+
+
+micronaut {
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.example.*")
+    }
+}
+
+
+
